@@ -1,0 +1,60 @@
+services:
+  nginx:
+    build:
+      context: ./config/nginx
+    container_name: nginx
+    ports:
+      - "${NGINX_HTTP_PORT:-80}:80"
+      - "${NGINX_HTTPS_PORT:-443}:443"
+    volumes:
+      - ./www:/www
+      - ./config/nginx/conf.d:/etc/nginx/conf.d
+      - ./config/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./config/nginx/fastcgi-php.conf:/etc/nginx/fastcgi-php.conf
+      - ./config/nginx/fastcgi_params:/etc/nginx/fastcgi_params
+      - ./logs/nginx:/var/log/nginx
+    restart: unless-stopped
+    depends_on:
+      - php
+    networks:
+      - dockerpress-network
+
+  php:
+    build:
+      context: ./config/php
+      args:
+        DEBIAN_MIRROR_DOMAIN: deb.debian.org
+        PHP_EXTENSIONS: pdo_mysql mysqli gd curl opcache sockets
+        TZ: "${TZ:-UTC}"
+    container_name: php
+    volumes:
+      - ./www:/www
+      - ./config/php/php.ini:/usr/local/etc/php/php.ini
+      - ./config/php/php-fpm.conf:/usr/local/etc/php-fpm.d/www.conf
+      - ./logs/php:/var/log/php
+    restart: unless-stopped
+    cap_add:
+      - SYS_PTRACE
+    networks:
+      - dockerpress-network
+
+  mysql:
+    image: mysql:8.0.36
+    container_name: mysql
+    ports:
+      - "${MYSQL_PORT:-3306}:3306"
+    volumes:
+      - ./config/mysql/mysql.cnf:/etc/mysql/conf.d/mysql.cnf
+      - ./data/mysql:/var/lib/mysql/
+      - ./logs/mysql:/var/log/mysql/
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD:-12345678}"
+      MYSQL_ROOT_HOST: "${MYSQL_ROOT_HOST:-%}"
+      TZ: "${TZ:-UTC}"
+    networks:
+      - dockerpress-network
+
+networks:
+  dockerpress-network:
+    driver: bridge
