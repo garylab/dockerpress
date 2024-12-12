@@ -12,6 +12,7 @@
     ```bash
     cp docker-compose.yml.sample docker-compose.yml
     ```
+   Customize the `docker-compose.yml` file as needed.
 3. Run the following command:
     ```bash
     docker-compose up -d
