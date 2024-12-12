@@ -6,3 +6,6 @@ nohup.out
 *.log
 docker-compose.yml
 *.zip
+tmp/
+logs/
+mysql-data/
