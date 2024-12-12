@@ -21,8 +21,8 @@ services:
       context: ./config/php
       args:
         DEBIAN_MIRROR_DOMAIN: deb.debian.org
-        PHP_EXTENSIONS: "${PHP_EXTENSIONS:-pdo_mysql mysqli gd curl opcache sockets redis imagick intl zip bcmath exif}"
-        TZ: "${TZ:-UTC}"
+        PHP_EXTENSIONS: pdo_mysql mysqli gd curl opcache sockets redis imagick intl zip bcmath exif
+        TZ: UTC
     volumes:
       - ./src:/src
       - ./config/php/php.ini:/usr/local/etc/php/php.ini
@@ -44,9 +44,9 @@ services:
       - ./logs:/var/log/mysql/
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD:-12345678}"
-      MYSQL_ROOT_HOST: "${MYSQL_ROOT_HOST:-%}"
-      TZ: "${TZ:-UTC}"
+      MYSQL_ROOT_PASSWORD: 12345678
+      MYSQL_ROOT_HOST: %
+      TZ: UTC
     networks:
       - dockerpress-network
 
