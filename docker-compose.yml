@@ -1,18 +1,15 @@
 services:
   nginx:
     build:
-      context: ./configuration/nginx
-    container_name: nginx
+      context: ./config/nginx
     ports:
-      - "${NGINX_HTTP_PORT:-80}:80"
-      - "${NGINX_HTTPS_PORT:-443}:443"
+      - "8888:80"
     volumes:
-      - ./www:/www
-      - ./configuration/nginx/conf.d:/etc/nginx/conf.d
-      - ./configuration/nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./configuration/nginx/fastcgi-php.conf:/etc/nginx/fastcgi-php.conf
-      - ./configuration/nginx/fastcgi_params:/etc/nginx/fastcgi_params
-      - ./logs/nginx:/var/log/nginx
+      - ./src:/src
+      - ./config/nginx/conf.d:/etc/nginx/conf.d
+      - ./config/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./config/nginx/fastcgi_params.conf:/etc/nginx/fastcgi_params.conf
+      - ./logs:/var/log/nginx
     restart: unless-stopped
     depends_on:
       - php
@@ -21,17 +18,16 @@ services:
 
   php:
     build:
-      context: ./configuration/php
+      context: ./config/php
       args:
         DEBIAN_MIRROR_DOMAIN: deb.debian.org
-        PHP_EXTENSIONS: pdo_mysql mysqli gd curl opcache sockets redis imagick intl zip bcmath exif
+        PHP_EXTENSIONS: "${PHP_EXTENSIONS:-pdo_mysql mysqli gd curl opcache sockets redis imagick intl zip bcmath exif}"
         TZ: "${TZ:-UTC}"
-    container_name: php
     volumes:
-      - ./www:/www
-      - ./configuration/php/php.ini:/usr/local/etc/php/php.ini
-      - ./configuration/php/php-fpm.conf:/usr/local/etc/php-fpm.d/www.conf
-      - ./logs/php:/var/log/php
+      - ./src:/src
+      - ./config/php/php.ini:/usr/local/etc/php/php.ini
+      - ./config/php/www.conf:/usr/local/etc/php-fpm.d/www.conf
+      - ./logs:/var/log/php
     restart: unless-stopped
     cap_add:
       - SYS_PTRACE
@@ -40,13 +36,12 @@ services:
 
   mysql:
     image: mysql:8.0.36
-    container_name: mysql
-    ports:
-      - "${MYSQL_PORT:-3306}:3306"
+    expose:
+      - "3306"
     volumes:
-      - ./configuration/mysql/mysql.cnf:/etc/mysql/conf.d/mysql.cnf
-      - ./data/mysql:/var/lib/mysql/
-      - ./logs/mysql:/var/log/mysql/
+      - ./config/mysql/mysql.cnf:/etc/mysql/conf.d/mysql.cnf
+      - ./mysql-data:/var/lib/mysql/
+      - ./logs:/var/log/mysql/
     restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD:-12345678}"
