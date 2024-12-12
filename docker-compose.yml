@@ -24,7 +24,7 @@ services:
       context: ./configuration/php
       args:
         DEBIAN_MIRROR_DOMAIN: deb.debian.org
-        PHP_EXTENSIONS: pdo_mysql gd curl opcache sockets redis imagick intl zip bcmath exif
+        PHP_EXTENSIONS: pdo_mysql mysqli gd curl opcache sockets redis imagick intl zip bcmath exif
         TZ: "${TZ:-UTC}"
     container_name: php
     volumes:
