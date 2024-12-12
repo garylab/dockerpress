@@ -5,3 +5,4 @@ nohup.out
 *.iml
 *.log
 docker-compose.yml
+*.zip
