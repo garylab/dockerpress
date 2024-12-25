@@ -3,7 +3,7 @@ services:
     build:
       context: nginx
     ports:
-      - "8888:80"
+      - "80:80"
     volumes:
       - ./src:/src
       - ./nginx/conf.d:/etc/nginx/conf.d
