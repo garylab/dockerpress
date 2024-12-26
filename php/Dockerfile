@@ -16,4 +16,4 @@ RUN curl -sSLf -o /usr/local/bin/install-php-extensions https://github.com/mloca
     && chmod +x /usr/local/bin/install-php-extensions \
     && install-php-extensions $PHP_EXTENSIONS
 
-WORKDIR /www
+WORKDIR /src
