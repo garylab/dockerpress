@@ -11,6 +11,11 @@ services:
       - ./nginx/fastcgi_params.conf:/etc/nginx/fastcgi_params.conf
       - ./logs:/var/log/nginx
     restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 2G
     depends_on:
       - php
     networks:
@@ -29,6 +34,11 @@ services:
       - ./php/www.conf:/usr/local/etc/php-fpm.d/www.conf
       - ./logs:/var/log/php
     restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 4G
     cap_add:
       - SYS_PTRACE
     networks:
@@ -43,6 +53,11 @@ services:
       - ./mysql-data:/var/lib/mysql/
       - ./logs:/var/log/mysql/
     restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '4'
+          memory: 8G
     environment:
       MYSQL_ROOT_PASSWORD: 12345678
       MYSQL_ROOT_HOST: "%"
