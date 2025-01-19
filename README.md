@@ -26,3 +26,8 @@
     docker compose up -d
     ```
 6. Open your browser and access [http://localhost](http://localhost).
+7. The MySQL configurations default are:
+   - **Host**: `mysql`
+   - **Port**: `3306`
+   - **Username**: `root`
+   - **Password**: `12345678`
