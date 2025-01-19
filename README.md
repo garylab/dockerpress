@@ -15,13 +15,13 @@
    Customize the `docker-compose.yml` file as needed.
 3. Run the following command:
     ```bash
-    docker-compose up -d
+    docker compose up -d
     ```
 4. Download WordPress and unzip files to `src` directory.
     ```bash
    curl -s https://wordpress.org/latest.zip -o /tmp/latest.zip \
-   && unzip -q /tmp/latest.zip -d /tmp \
-   && mv /tmp/wordpress/* src/ \
-   && rm -rf /tmp/wordpress /tmp/latest.zip
+       && unzip -q /tmp/latest.zip -d /tmp \
+       && mv /tmp/wordpress/* src/ \
+       && rm -rf /tmp/wordpress /tmp/latest.zip
    ```
-5. Open your browser and go to `http://localhost:8888`
+5. Open your browser and access [http://localhost](http://localhost).
