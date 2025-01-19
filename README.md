@@ -13,10 +13,7 @@
     cp docker-compose.yml.sample docker-compose.yml
     ```
    Customize the `docker-compose.yml` file as needed.
-3. Run the following command:
-    ```bash
-    docker compose up -d
-    ```
+   E.g. nginx expose port `80` to host default, change it to another one if it was occupied.
 4. Download WordPress and unzip files to `src` directory.
     ```bash
    curl -s https://wordpress.org/latest.zip -o /tmp/latest.zip \
@@ -24,4 +21,8 @@
        && mv /tmp/wordpress/* src/ \
        && rm -rf /tmp/wordpress /tmp/latest.zip
    ```
-5. Open your browser and access [http://localhost](http://localhost).
+5. Run the following command:
+    ```bash
+    docker compose up -d
+    ```
+6. Open your browser and access [http://localhost](http://localhost).
