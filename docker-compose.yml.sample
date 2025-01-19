@@ -61,6 +61,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: 12345678
       MYSQL_ROOT_HOST: "%"
+      MYSQL_DATABASE: wordpress
       TZ: UTC
     networks:
       - dockerpress-network
