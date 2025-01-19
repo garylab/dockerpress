@@ -56,8 +56,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '4'
-          memory: 8G
+          cpus: '2'
+          memory: 4G
     environment:
       MYSQL_ROOT_PASSWORD: 12345678
       MYSQL_ROOT_HOST: "%"
