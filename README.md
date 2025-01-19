@@ -29,5 +29,7 @@
 7. The MySQL configurations default are:
    - **Host**: `mysql`
    - **Port**: `3306`
+   - **DB name**: `wordpress`
    - **Username**: `root`
    - **Password**: `12345678`
+   All the values can be modified in `docker-compose.yml` file.
