@@ -26,10 +26,10 @@
     docker compose up -d
     ```
 6. Open your browser and access [http://localhost](http://localhost).
-7. The MySQL configurations default are:
+7. The MySQL configurations default are (all of the values can be modified in `docker-compose.yml` file):
    - **Host**: `mysql`
    - **Port**: `3306`
-   - **DB name**: `wordpress`
+   - **DB Name**: `wordpress`
    - **Username**: `root`
    - **Password**: `12345678`
-   All the values can be modified in `docker-compose.yml` file.
+   
