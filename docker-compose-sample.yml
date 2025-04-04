@@ -12,7 +12,7 @@ services:
           curl -o latest.tar.gz https://wordpress.org/latest.tar.gz;
           tar -xzf latest.tar.gz --strip-components=1 -C /src;
           rm latest.tar.gz;
-          chown -R 1000:1000 /src;
+          chown -R www-data:www-data /src;
         else
           echo "WordPress already installed.";
         fi
