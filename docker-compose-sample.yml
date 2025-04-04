@@ -1,4 +1,23 @@
 services:
+  init:
+    image: alpine:latest
+    volumes:
+      - ./src:/src
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - >
+        if [ ! -f "/src/wp-load.php" ]; then
+          echo "Downloading latest WordPress...";
+          apk add --no-cache curl tar;
+          curl -o latest.tar.gz https://wordpress.org/latest.tar.gz;
+          tar -xzf latest.tar.gz --strip-components=1 -C /src;
+          rm latest.tar.gz;
+          chown -R 1000:1000 /src;
+        else
+          echo "WordPress already installed.";
+        fi
+    restart: "no"
+
   nginx:
     build:
       context: nginx
