@@ -5,7 +5,7 @@
 ## How to use
 1. Clone this repository and go to the directory:
     ```bash
-    git clone https://github.com/yeszao/dockerpress.git
+    git clone https://github.com/garylab/dockerpress.git
     cd dockerpress
     ```
 2. Copy `docker-compose.yml.sample` to `docker-compose.yml`:
