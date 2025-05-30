@@ -16,7 +16,7 @@ services:
         else
           echo "WordPress already installed.";
         fi
-    restart: unless-stopped
+    restart: no
 
   nginx:
     build:
