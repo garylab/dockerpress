@@ -91,6 +91,8 @@ services:
       - "6379:6379"
     volumes:
       - ./redis-data:/data
+    networks:
+      - dockerpress-network
       
 networks:
   dockerpress-network:
