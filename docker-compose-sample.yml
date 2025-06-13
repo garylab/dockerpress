@@ -85,6 +85,13 @@ services:
     networks:
       - dockerpress-network
 
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis-data:/data
+      
 networks:
   dockerpress-network:
     driver: bridge
