@@ -96,7 +96,7 @@ services:
       - dockerpress-network
       
   typesense:
-    image: typesense/typesense:latest
+    image: typesense/typesense:28.0
     restart: unless-stopped
     expose:
       - "8108"
