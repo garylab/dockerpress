@@ -9,3 +9,4 @@ docker-compose.yml
 tmp/
 logs/
 mysql-data/
+redis-data/

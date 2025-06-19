@@ -86,29 +86,15 @@ services:
       - dockerpress-network
 
   redis:
-    image: redis:latest
+    image: redis:8.0.2-alpine
     restart: unless-stopped
-    ports:
-      - "6379:6379"
     volumes:
       - ./redis-data:/data
+      - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
     networks:
       - dockerpress-network
-      
-  typesense:
-    image: typesense/typesense:28.0
-    restart: unless-stopped
-    expose:
-      - "8108"
-    volumes:
-      - ./typesense-data:/data
-    command: >
-      typesense-server
-        --data-dir /data
-        --api-key=12345678
-        --enable-cors
-    networks:
-      - dockerpress-network
+
       
 networks:
   dockerpress-network:
