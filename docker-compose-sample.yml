@@ -88,6 +88,11 @@ services:
   redis:
     image: redis:8.0.2-alpine
     restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1G
     volumes:
       - ./redis-data:/data
       - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
