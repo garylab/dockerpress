@@ -6,13 +6,13 @@ services:
     entrypoint: ["/bin/sh", "-c"]
     command:
       - >
-        if [ ! -f "/src/wp-load.php" ]; then
+        if [ ! -f "/src/default/wp-load.php" ]; then
           echo "Downloading latest WordPress...";
           apk add --no-cache curl tar;
           curl -o latest.tar.gz https://wordpress.org/latest.tar.gz;
-          tar -xzf latest.tar.gz --strip-components=1 -C /src;
+          tar -xzf latest.tar.gz --strip-components=1 -C /src/default;
           rm latest.tar.gz;
-          chown -R www-data:www-data /src;
+          chown -R www-data:www-data /src/default;
         else
           echo "WordPress already installed.";
         fi
