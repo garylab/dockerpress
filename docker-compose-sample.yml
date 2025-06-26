@@ -1,6 +1,6 @@
 services:
   init:
-    image: alpine:latest
+    image: php:8.2-fpm
     volumes:
       - ./src:/src
     entrypoint: ["/bin/sh", "-c"]
