@@ -85,6 +85,8 @@ services:
       - ./redis-data:/data
       - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
     command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+    sysctls:
+      vm.overcommit_memory: "1"
     networks:
       - dockerpress-network
 
