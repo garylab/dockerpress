@@ -30,11 +30,8 @@ services:
       - ./nginx/fastcgi_params.conf:/etc/nginx/fastcgi_params.conf
       - ./logs:/var/log/nginx
     restart: unless-stopped
-    deploy:
-      resources:
-        limits:
-          cpus: '1'
-          memory: 1G
+    cpus: "1"
+    mem_limit: 512m
     depends_on:
       - php
     networks:
@@ -53,11 +50,8 @@ services:
       - ./php/www.conf:/usr/local/etc/php-fpm.d/www.conf
       - ./logs:/var/log/php
     restart: unless-stopped
-    deploy:
-      resources:
-        limits:
-          cpus: '2'
-          memory: 4G
+    cpus: "2"
+    mem_limit: 4G
     cap_add:
       - SYS_PTRACE
     networks:
@@ -72,11 +66,8 @@ services:
       - ./mysql-data:/var/lib/mysql/
       - ./logs:/var/log/mysql/
     restart: unless-stopped
-    deploy:
-      resources:
-        limits:
-          cpus: '2'
-          memory: 4G
+    cpus: "2"
+    mem_limit: 4G
     environment:
       MYSQL_ROOT_PASSWORD: 12345678
       MYSQL_ROOT_HOST: "%"
@@ -88,11 +79,8 @@ services:
   redis:
     image: redis:8.0.2-alpine
     restart: unless-stopped
-    deploy:
-      resources:
-        limits:
-          cpus: '1'
-          memory: 1G
+    cpus: "1"
+    mem_limit: 1G
     volumes:
       - ./redis-data:/data
       - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
